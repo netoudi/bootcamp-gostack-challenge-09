@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:12.3-alpine
+    container_name: challenge-db
+    restart: always
+    tty: true
+    volumes:
+      - .docker/postgres/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+      - .docker/dbdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+    ports:
+      - 5432:5432
